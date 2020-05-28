@@ -30,51 +30,51 @@ python scripts for ASR raw data
     
     DataFrame => DataFrame
 
+2 manipulation.py
 
-2 offset.py
-  offset strain raw data
+2-1 manipulation.offset
+    offset strain raw data
 
-  DataFrame => DataFrame
-
-
-3 dummy_sub.py
-  subtracting dummy strain data
-
-  DataFrame => DataFrame
-
-4 sma.py
-  simple moving averaging strain data
-
-  DataFrame => DataFrame
+    DataFrame => DataFrame
 
 
-5 cat_strain_temp.py
-  concatinate strain DataFrame & temperature DataFrame
+2-2 manipulation.dummy_sub
+    subtracting dummy strain data
 
-  DataFrame => DataFrame
+    DataFrame => DataFrame
 
+2-3 manipulation.sma
+    simple moving averaging strain data
 
-6 output_csv.py
-  make csv file of strain data
-
-  DataFrame => csv
-
-
-7 plot.py
-
-7-1 plot.strain
-  plot strain data
-
-  DataFrame => png
+    DataFrame => DataFrame
 
 
-7-2 plot.each_dirc
+2-4 manipulation.cat_DataFrame
+    concatinate strain DataFrame & temperature DataFrame
+
+    DataFrame => DataFrame
+   
+2-5 manipulation.output_csv
+    make csv file of strain data
+
+    DataFrame => csv
+
+
+3 plot.py
+
+3-1 plot.strain
+    plot strain data
+
+    DataFrame => png
+
+
+3-2 plot.each_dirc
   plot each direction of strain 
 
   DataFrame => png
 
 
-7-3 plot.dummpy
+7-3 plot.dummy
   plot dummy data 
 
   DataFrame => png
