@@ -2,20 +2,20 @@
 xx,CH010
 xx,CH011
 yy,CH012
-yy,CH013
+yy,
 zz,CH014
 zz,CH015
 xy,CH016
 xy,CH017
 yx,CH018
 yx,CH019
-yz,CH020
+yz,
 yz,CH021
 zy,CH022
 zy,CH023
 zx,CH024
 zx,CH025
-xz,CH026
+xz,
 xz,CH027
 Initial Time,5
 Final Time,4659

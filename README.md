@@ -9,21 +9,26 @@ python scripts for ASR raw data
     csv => DataFrame
 
 1-1 input.strain
-  load strain(not temperature) raw data as pandas' DataFrame
+    load strain(not temperature) raw data as pandas' DataFrame
 
-  DataFrame => DataFrame
+    DataFrame => DataFrame
 
 
 1-2 input.dummy
-  load dummpy strain data as pandas' DataFrame
+    load dummpy strain data as pandas' DataFrame
 
-  DataFrame => DataFrame
+    DataFrame => DataFrame
 
 
 1-3 input.temperature
-  load temperature data as DataFrame
+    load temperature data as DataFrame
 
-  DataFrame => DataFrame
+    DataFrame => DataFrame
+
+1-4 input.date
+    load date as DataFrame
+    
+    DataFrame => DataFrame
 
 
 2 offset.py
