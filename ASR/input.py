@@ -36,7 +36,7 @@ def strain(sample_ID, raw_data_csv, setting):
     
     ls = list(range(ini_time, fin_time+1))
     ls.insert(0,0)
-    strain = pd.read_csv(raw_data_csv, skiprows=lambda x: x not in ls, usecols=ch)
+    strain = pd.read_csv(raw_data_csv,                          skiprows=lambda x: x not in ls,                          usecols=ch)
     
     return strain
 
@@ -88,51 +88,3 @@ def date(sample_ID, raw_data_csv, setting):
     date = pd.read_csv(raw_data_csv,                          skiprows=lambda x: x not in ls,                          usecols=["Elapsed Time","Time.", "Channel No.", "---.1"])
     
     return date
-
-
-# # テスト部分
-
-# In[61]:
-
-
-raw_data_csv = "./InputFiles/normal_strain.csv"
-setting_csv= "./InputFiles/input.csv"
-dummy_ch_csv = "./InputFiles/dummy_ch.csv"
-sID = "FDB-08"
-
-
-# In[62]:
-
-
-b,c =  csv(setting_csv=setting_csv, dummy_ch_csv=dummy_ch_csv)
-
-
-# In[63]:
-
-
-s = strain(sID, raw_data_csv, b)
-
-
-# In[64]:
-
-
-ddu=dummy(sID, raw_data_csv, b, c)
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-

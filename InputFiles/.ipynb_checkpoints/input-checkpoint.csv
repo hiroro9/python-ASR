@@ -1,26 +1,27 @@
-#,FDB-08,FDB-09,FDB-14
-xx,CH010,CH011,CH012
-xx,CH011,CH012,CH014
-yy,CH012,CH014,CH014
-yy,,,
-zz,CH014,CH015,CH016
-zz,CH015,CH016,CH017
-xy,CH016,CH017,CH018
-xy,CH017,CH018,CH019
-yx,CH018,CH019,CH020
-yx,CH019,CH020,CH021
-yz,,,
-yz,CH021,CH022,CH023
-zy,CH022,CH023,CH024
-zy,CH023,CH024,CH025
-zx,CH024,CH025,CH026
-zx,CH025,CH026,CH027
-xz,,,
-xz,CH027,CH028,CH029
-Initial Time,5,6,7
-Final Time,4659,4660,4661
-Using Dummy,0,1,2
-Which Dummy,,CH028,
-Inclined direction,0,1,2
-Angle(degree),0,1,2
-Azimuth(degree),0,1,2
+#,FDB-08,FDB-09
+xx,CH010,CH010
+xx,CH011,CH011
+yy,CH012,CH012
+yy,,
+zz,CH014,CH014
+zz,CH015,CH015
+xy,CH016,CH016
+xy,CH017,CH017
+yx,CH018,CH018
+yx,CH019,CH019
+yz,,
+yz,CH021,CH021
+zy,CH022,CH022
+zy,CH023,CH023
+zx,CH024,CH024
+zx,CH025,CH025
+xz,,
+xz,CH027,CH027
+Initial Time,5,5
+Final Time,4659,4659
+Using Dummy,0,1
+Which Dummy,,CH028
+SMA Window,1,1000
+Inclined direction,0,0
+Angle(degree),0,0
+Azimuth(degree),0,0

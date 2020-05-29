@@ -3,7 +3,7 @@
 
 # # plot.py
 
-# In[19]:
+# In[1]:
 
 
 import matplotlib.pyplot as plt
@@ -12,18 +12,20 @@ import pandas as pd
 
 # ## 1. strain
 
-# In[34]:
+# In[13]:
 
 
-def strain(data, sample_ID):
+def strain(data, temp, sample_ID):
     plt.rcParams["font.size"]=25
     fig, ax = plt.subplots(1,1,figsize=(40,20))
     data.plot(x="Elapsed Time", ax=ax)
     ax.set_xlabel("Elapsed Time[h]", fontsize="large", fontweight="bold")
     
-#     ax_t = ax.twinx()
-#     data_t1.plot(x="Elapsed Time",ax = ax_t,marker = "o")
-#     ax_t.set_ylabel("Temperature[$^\circ$C]", fontsize="large",fontweight="bold")
+    ax_t = ax.twinx()
+    temp.loc[:,["Elapsed Time", "CH001"]].plot(x="Elapsed Time",ax = ax_t, marker = "o")
+    ax_t.set_ylabel("Temperature[$^\circ$C]", fontsize="large",fontweight="bold")
+    ax_t.set_ylim([-30,35])
+    ax_t.legend()
     
     ax.set_ylabel("Strain[$\mu$strain]", fontsize="large",fontweight="bold")
     ax.legend(bbox_to_anchor=(1.2,1))
@@ -32,12 +34,11 @@ def strain(data, sample_ID):
     
     fig.savefig("./output/" + sample_ID + ".png")
     plt.close(fig)
-#     return fig
 
 
 # ## 2. each_dirc
 
-# In[56]:
+# In[3]:
 
 
 def each_dirc(data, sample_ID, condition):
@@ -57,6 +58,27 @@ def each_dirc(data, sample_ID, condition):
     
     fig.savefig("./output/" + sample_ID + "_each.png")
     plt.close(fig)
-    
-#     return fig
 
+
+# ## 3. dummy
+
+# In[4]:
+
+
+def dummy(data, temp, sample_ID):
+    plt.rcParams["font.size"]=25
+    fig, ax = plt.subplots(1,1,figsize=(40,20))
+    data.plot(x="Elapsed Time", ax=ax)
+    ax.set_xlabel("Elapsed Time[h]", fontsize="large", fontweight="bold")
+    
+    ax_t = ax.twinx()
+    temp.plot(x="Elapsed Time",ax = ax_t,marker = "o")
+    ax_t.set_ylabel("Temperature[$^\circ$C]", fontsize="large",fontweight="bold")
+    
+    ax.set_ylabel("Strain[$\mu$strain]", fontsize="large",fontweight="bold")
+    ax.legend(bbox_to_anchor=(1.2,1))
+    plt.subplots_adjust(left=0.1, right=0.8)
+    fig.suptitle(sample_ID + " dummy samples", fontsize="large",fontweight="bold")
+    
+    fig.savefig("./output/" + sample_ID + "_dummy.png")
+    plt.close(fig)

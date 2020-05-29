@@ -3,7 +3,7 @@
 
 # # offset.py 本体
 
-# In[12]:
+# In[1]:
 
 
 import pandas as pd
@@ -11,32 +11,32 @@ import pandas as pd
 
 # ## 1. offset
 
-# In[15]:
+# In[2]:
 
 
 def offset(data):
-    offset = data - data.values[0,:]
+    data = data - data.values[0,:]
     
-    return offset
+    return data
 
 
 # ## 2. dummy_sub
 
-# In[31]:
+# In[18]:
 
 
-def dummy_sub(data, dummy):
-    sub_data = data - dummy
-    
-    return sub_data
+def dummy_sub(data, dummy, dum_ch):
+    data = data.add(-dummy[dum_ch].values[:], axis=0)
+
+    return data
 
 
 # ## 3. sma
 
-# In[18]:
+# In[4]:
 
 
 def sma(data, sma_window):
-    sma_data = data.rolling(window=sma_window, min_periods=1).mean()
+    data = data.rolling(window=sma_window, min_periods=1).mean()
     
-    return sma_data
+    return data
