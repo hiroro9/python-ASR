@@ -3,7 +3,7 @@
 
 # # input.py 本体
 
-# In[41]:
+# In[55]:
 
 
 import pandas as pd
@@ -12,76 +12,127 @@ import numpy as np
 
 # ## 0. csv
 
-# In[150]:
+# In[56]:
 
 
-def csv(raw_data_csv, condition_csv, dummy_ch_csv):
+def csv(setting_csv, dummy_ch_csv):
     """input all csv files"""
-    raw_data = pd.read_csv(raw_data_csv, index_col=1, skiprows=[1], converters={"Time.":str, 'Channel No.':str, "---.1":str})
-    condition = pd.read_csv(condition_csv, index_col=0)
-    dummy_ch = pd.read_csv(dummy_ch_csv, index_col=0)
     
-    return raw_data , condition , dummy_ch 
+    setting = pd.read_csv(setting_csv, index_col=0)
+    dummy_ch = pd.read_csv(dummy_ch_csv, index_col=0, skiprows=[0])
+    
+    return setting , dummy_ch 
 
 
 # ## 1. strain
 
-# In[151]:
+# In[57]:
 
 
-def strain(sample_ID, raw_data, condition):
-    ini_time = int(condition.at["Initial Time", sample_ID])
-    fin_time = int(condition.at["Final Time", sample_ID])
-    ch = condition.loc["xx":"xz", sample_ID].dropna(how="all").values
-    time = raw_data.loc[ini_time:fin_time, ["Elapsed Time","Time.", "Channel No.", "---.1"]]
-    strain = raw_data.loc[ini_time:fin_time, ch]
-#     if add time columns
-#     strain = pd.concat([time, strain], axis=1)
+def strain(sample_ID, raw_data_csv, setting):
+    ini_time = int(setting.at["Initial Time", sample_ID])
+    fin_time = int(setting.at["Final Time", sample_ID])
+    ch = setting.loc["xx":"xz", sample_ID].dropna(how="all").values
+    
+    ls = list(range(ini_time, fin_time+1))
+    ls.insert(0,0)
+    strain = pd.read_csv(raw_data_csv, skiprows=lambda x: x not in ls, usecols=ch)
     
     return strain
 
 
 # ## 2. dummy
 
-# In[152]:
+# In[58]:
 
 
-def dummy(sample_ID, raw_data, condition, dummy_ch):
-    ini_time = int(condition.at["Initial Time", sample_ID])
-    fin_time = int(condition.at["Final Time", sample_ID])
-    dummy_ch.values
-    dummy = raw_data.loc[ini_time:fin_time, dummy_ch.values[0,:]]
-    time = raw_data.loc[ini_time:fin_time, ["Elapsed Time","Time.", "Channel No.", "---.1"]]
-#     if add time columns
-#     dummy = pd.concat([time, dummy], axis=1)
+def dummy(sample_ID, raw_data_csv, setting, dummy_ch):
+    ini_time = int(setting.at["Initial Time", sample_ID])
+    fin_time = int(setting.at["Final Time", sample_ID])
+    dv = list(dummy_ch)
     
+    ls = list(range(ini_time, fin_time+1))
+    ls.insert(0,0)
+    dummy = pd.read_csv(raw_data_csv,                          skiprows=lambda x: x not in ls,                          usecols=dv)
+   
     return dummy
 
 
 # ## 3. temperature
 
-# In[153]:
+# In[59]:
 
 
-def temperature(sample_ID, raw_data, condition):
-    ini_time = int(condition.at["Initial Time", sample_ID])
-    fin_time = int(condition.at["Final Time", sample_ID])
-    temperature = raw_data.loc[ini_time:fin_time, ["CH000", "CH001"]]
-    time = raw_data.loc[ini_time:fin_time, ["Elapsed Time","Time.", "Channel No.", "---.1"]]
-#     if add time columns
-#     temperature = pd.concat([time, temperature], axis=1)
+def temperature(sample_ID, raw_data_csv, setting):
+    ini_time = int(setting.at["Initial Time", sample_ID])
+    fin_time = int(setting.at["Final Time", sample_ID])
+    
+    ls = list(range(ini_time, fin_time+1))
+    ls.insert(0,0)
+    temperature = pd.read_csv(raw_data_csv,                          skiprows=lambda x: x not in ls,                          usecols=["CH000", "CH001"])
     
     return temperature
 
 
 # ## 4. date
 
-# In[154]:
+# In[60]:
 
 
-def date(sample_ID, raw_data, condition):
-    ini_time = int(condition.at["Initial Time", sample_ID])
-    fin_time = int(condition.at["Final Time", sample_ID])
-    time = raw_data.loc[ini_time:fin_time, ["Elapsed Time","Time.", "Channel No.", "---.1"]]
+def date(sample_ID, raw_data_csv, setting):
+    ini_time = int(setting.at["Initial Time", sample_ID])
+    fin_time = int(setting.at["Final Time", sample_ID])
     
-    return time
+    ls = list(range(ini_time, fin_time+1))
+    ls.insert(0,0)
+    date = pd.read_csv(raw_data_csv,                          skiprows=lambda x: x not in ls,                          usecols=["Elapsed Time","Time.", "Channel No.", "---.1"])
+    
+    return date
+
+
+# # テスト部分
+
+# In[61]:
+
+
+raw_data_csv = "./InputFiles/normal_strain.csv"
+setting_csv= "./InputFiles/input.csv"
+dummy_ch_csv = "./InputFiles/dummy_ch.csv"
+sID = "FDB-08"
+
+
+# In[62]:
+
+
+b,c =  csv(setting_csv=setting_csv, dummy_ch_csv=dummy_ch_csv)
+
+
+# In[63]:
+
+
+s = strain(sID, raw_data_csv, b)
+
+
+# In[64]:
+
+
+ddu=dummy(sID, raw_data_csv, b, c)
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
