@@ -25,6 +25,8 @@ dummy_ch_csv = "./InputFiles/dummy_ch.csv"
 
 # load data from csv
 setting_data, dummy_ch = input.csv(setting_csv=setting_csv, dummy_ch_csv=dummy_ch_csv)
+print(setting_data)
+print("")
 
 
 # ## each sample
