@@ -9,10 +9,12 @@ from ASR import manipulation
 from ASR import plot
 import pandas as pd
 import gc
+import os
 
 
 # In[2]:
 
+os.makedirs("./output", exist_ok=True)
 
 # input file names
 raw_data_csv = "./InputFiles/normal_strain.csv"
@@ -59,7 +61,8 @@ for i in setting_data.columns:
     
     # make csv file
     data = pd.concat([date, strain, temperature], axis=1)
-    data.to_csv("./output/" + i + ".csv", mode="w")
+#    data.to_csv("./output/" + i + ".csv", mode="w")
+    data.to_csv("./output/{}.csv".format(i), mode="w")
     del data
     gc.collect()
     

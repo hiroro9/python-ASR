@@ -32,7 +32,8 @@ def strain(data, temp, sample_ID):
     plt.subplots_adjust(left=0.1, right=0.8)
     fig.suptitle(sample_ID, fontsize="large",fontweight="bold")
     
-    fig.savefig("./output/" + sample_ID + ".png")
+    fig.savefig("./output/{}.png".format(sample_ID))
+    #fig.savefig("./output/" + sample_ID + ".png")
     plt.close(fig)
 
 
@@ -56,7 +57,8 @@ def each_dirc(data, sample_ID, condition):
         axi.set_title(ech2.at[i,"#"])
     fig.suptitle(sample_ID + "_each_Gage",fontsize="large", fontweight="bold")
     
-    fig.savefig("./output/" + sample_ID + "_each.png")
+    fig.savefig("./output/{}_each.png".format(sample_ID))
+    #fig.savefig("./output/" + sample_ID + "_each.png")
     plt.close(fig)
 
 
@@ -80,5 +82,5 @@ def dummy(data, temp, sample_ID):
     plt.subplots_adjust(left=0.1, right=0.8)
     fig.suptitle(sample_ID + " dummy samples", fontsize="large",fontweight="bold")
     
-    fig.savefig("./output/" + sample_ID + "_dummy.png")
+    fig.savefig("./output/{}_dummy.png".format(sample_ID))
     plt.close(fig)
