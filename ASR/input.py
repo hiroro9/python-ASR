@@ -3,17 +3,11 @@
 
 # # input.py 本体
 
-# In[55]:
-
-
 import pandas as pd
 import numpy as np
 
 
 # ## 0. csv
-
-# In[56]:
-
 
 def csv(setting_csv, dummy_ch_csv):
     """input all csv files"""
@@ -26,9 +20,6 @@ def csv(setting_csv, dummy_ch_csv):
 
 # ## 1. strain
 
-# In[57]:
-
-
 def strain(sample_ID, raw_data_csv, setting):
     ini_time = int(setting.at["Initial Time", sample_ID])
     fin_time = int(setting.at["Final Time", sample_ID])
@@ -36,15 +27,12 @@ def strain(sample_ID, raw_data_csv, setting):
     
     ls = list(range(ini_time, fin_time+1))
     ls.insert(0,0)
-    strain = pd.read_csv(raw_data_csv,                          skiprows=lambda x: x not in ls,                          usecols=ch)
+    strain = pd.read_csv(raw_data_csv, skiprows=lambda x: x not in ls, usecols=ch)
     
     return strain
 
 
 # ## 2. dummy
-
-# In[58]:
-
 
 def dummy(sample_ID, raw_data_csv, setting, dummy_ch):
     ini_time = int(setting.at["Initial Time", sample_ID])
@@ -53,15 +41,12 @@ def dummy(sample_ID, raw_data_csv, setting, dummy_ch):
     
     ls = list(range(ini_time, fin_time+1))
     ls.insert(0,0)
-    dummy = pd.read_csv(raw_data_csv,                          skiprows=lambda x: x not in ls,                          usecols=dv)
+    dummy = pd.read_csv(raw_data_csv, skiprows=lambda x: x not in ls, usecols=dv)
    
     return dummy
 
 
 # ## 3. temperature
-
-# In[59]:
-
 
 def temperature(sample_ID, raw_data_csv, setting):
     ini_time = int(setting.at["Initial Time", sample_ID])
@@ -69,15 +54,12 @@ def temperature(sample_ID, raw_data_csv, setting):
     
     ls = list(range(ini_time, fin_time+1))
     ls.insert(0,0)
-    temperature = pd.read_csv(raw_data_csv,                          skiprows=lambda x: x not in ls,                          usecols=["CH000", "CH001"])
+    temperature = pd.read_csv(raw_data_csv, skiprows=lambda x: x not in ls, usecols=["CH000", "CH001"])
     
     return temperature
 
 
 # ## 4. date
-
-# In[60]:
-
 
 def date(sample_ID, raw_data_csv, setting):
     ini_time = int(setting.at["Initial Time", sample_ID])
@@ -85,6 +67,6 @@ def date(sample_ID, raw_data_csv, setting):
     
     ls = list(range(ini_time, fin_time+1))
     ls.insert(0,0)
-    date = pd.read_csv(raw_data_csv,                          skiprows=lambda x: x not in ls,                          usecols=["Elapsed Time","Time.", "Channel No.", "---.1"])
+    date = pd.read_csv(raw_data_csv, skiprows=lambda x: x not in ls, usecols=["Elapsed Time","Time.", "Channel No.", "---.1"])
     
     return date

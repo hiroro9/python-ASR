@@ -1,18 +1,36 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 from ASR import input
 from ASR import manipulation
 from ASR import plot
+import matplotlib.pyplot as plt
 import pandas as pd
 import gc
 import os
 
+#=========== general settings ============================#
+plt.rcParams["figure.figsize"] = [30, 20]
+plt.rcParams["figure.subplot.wspace"] = 0.4
+plt.rcParams["figure.subplot.hspace"] = 0.6
 
-# In[2]:
+plt.rcParams['font.family'] ='sans-serif'#使用するフォント
+plt.rcParams['font.sans-serif'] ='Arial'#使用するフォント
+plt.rcParams["font.size"] = 30
+plt.rcParams['mathtext.rm'] ='sans'#使用するフォント
+plt.rcParams['mathtext.default'] ='rm'#使用するフォント
+
+plt.rcParams['xtick.direction'] = 'in'#x軸の目盛線が内向き('in')か外向き('out')か双方向か('inout')
+plt.rcParams['ytick.direction'] = 'in'#y軸の目盛線が内向き('in')か外向き('out')か双方向か('inout')
+plt.rcParams['xtick.major.width'] = 1.0#x軸主目盛り線の線幅
+plt.rcParams['ytick.major.width'] = 1.0#y軸主目盛り線の線幅
+plt.rcParams["xtick.major.pad"] = 19.0
+plt.rcParams["ytick.major.pad"] = 16.0
+plt.rcParams["xtick.major.size"] = 10
+plt.rcParams["ytick.major.size"] = 10
+
+plt.rcParams['axes.linewidth'] = 1.0# 軸の線幅edge linewidth。囲みの太さ
+plt.rcParams["axes.labelpad"] = 10
+
+plt.rcParams["lines.linewidth"] = 3.0
+#==================================================================#
 
 os.makedirs("./output", exist_ok=True)
 
@@ -22,19 +40,13 @@ setting_csv= "./InputFiles/input.csv"
 dummy_ch_csv = "./InputFiles/dummy_ch.csv"
 
 
-# In[3]:
-
-
 # load data from csv
 setting_data, dummy_ch = input.csv(setting_csv=setting_csv, dummy_ch_csv=dummy_ch_csv)
 print(setting_data)
 print("")
 
 
-# ## each sample
-
-# In[5]:
-
+# each sample
 
 for i in setting_data.columns:
     sample_ID = i
@@ -63,7 +75,6 @@ for i in setting_data.columns:
     
     # make csv file
     data = pd.concat([date, strain, temperature], axis=1)
-#    data.to_csv("./output/" + i + ".csv", mode="w")
     data.to_csv("./output/{}.csv".format(i), mode="w")
     del data
     gc.collect()
@@ -76,10 +87,4 @@ for i in setting_data.columns:
     plot.strain(time_strain,time_temperature, i)
     plot.each_dirc(time_strain, i, setting_data)
     plot.dummy(time_dummy,time_temperature, i)
-
-
-# In[ ]:
-
-
-
 
