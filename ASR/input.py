@@ -37,12 +37,17 @@ def strain(sample_ID, raw_data_csv, setting):
 def dummy(sample_ID, raw_data_csv, setting, dummy_ch):
     ini_time = int(setting.at["Initial Time", sample_ID])
     fin_time = int(setting.at["Final Time", sample_ID])
-    dv = list(dummy_ch)
-    
-    ls = list(range(ini_time, fin_time+1))
-    ls.insert(0,0)
-    dummy = pd.read_csv(raw_data_csv, skiprows=lambda x: x not in ls, usecols=dv)
-   
+
+    if dummy_ch.empty:
+      dummy = 
+      
+    else:
+      dv = list(dummy_ch)
+      
+      ls = list(range(ini_time, fin_time+1))
+      ls.insert(0,0)
+      dummy = pd.read_csv(raw_data_csv, skiprows=lambda x: x not in ls, usecols=dv)
+     
     return dummy
 
 
