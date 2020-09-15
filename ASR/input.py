@@ -39,7 +39,7 @@ def dummy(sample_ID, raw_data_csv, setting, dummy_ch):
     fin_time = int(setting.at["Final Time", sample_ID])
 
     if dummy_ch.empty:
-      dummy = 
+      dummy = pd.DataFrame(index = [1], columns = range(ini_time, fin_time)).fillna(0)
       
     else:
       dv = list(dummy_ch)
