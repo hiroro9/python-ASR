@@ -13,7 +13,7 @@ def csv(setting_csv, dummy_ch_csv):
     """input all csv files"""
     
     setting = pd.read_csv(setting_csv, index_col=0)
-    dummy_ch = pd.read_csv(dummy_ch_csv, index_col=0, skiprows=[0])
+    dummy_ch = pd.read_csv(dummy_ch_csv, index_col=0, header = None)
     
     return setting , dummy_ch 
 
@@ -39,10 +39,10 @@ def dummy(sample_ID, raw_data_csv, setting, dummy_ch):
     fin_time = int(setting.at["Final Time", sample_ID])
 
     if dummy_ch.empty:
-      dummy = pd.DataFrame(index = [1], columns = range(ini_time, fin_time)).fillna(0)
+      dummy = pd.DataFrame(index = range(0, fin_time - ini_time + 1) , columns = ["CH_None"]).fillna(0)
       
     else:
-      dv = list(dummy_ch)
+      dv = dummy_ch.values.tolist()[0]
       
       ls = list(range(ini_time, fin_time+1))
       ls.insert(0,0)
